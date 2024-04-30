@@ -1,0 +1,478 @@
+#propiedad fundamental
+openapi: 3.0.0
+info:
+  title: API de Sistema de Facturación y Stock
+  description: API para gestionar facturas, productos, clientes, proveedores, inventario y reportes.
+  version: 1.0.0
+servers:
+  - url: localhost:8080/par2024
+
+#propiedad fundamental  
+paths:
+  /facturas:
+  # GET /facturas: Obtener todas las facturas.
+    get:
+      summary: Obtener todas las facturas
+      responses:
+        '200':
+          description: Lista de facturas obtenida correctamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Factura'
+    post:
+    # POST /facturas: Crear una nueva factura.
+      summary: Crear una nueva factura
+      responses:
+        '200':
+          description: Lista de facturas obtenida correctamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Factura'
+                  
+  /facturas/{id}:
+  # GET /facturas/{id}: Obtener una factura por su ID.
+    get:
+      summary: Obtener una factura por su ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID único de la factura
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Factura obtenida correctamente
+        '404':
+          description: Factura no encontrada
+  # PUT /facturas/{id}: Actualizar una factura existente por su ID.
+    put:
+      summary: Actualizar una factura existente por su ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID único de la factura
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Factura obtenida correctamente
+        '404':
+          description: Factura no encontrada
+  # DELETE /facturas/{id}: Eliminar una factura existente por su ID.
+    delete:
+      summary: Eliminar una factura existente por su ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID único de la factura
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Factura obtenida correctamente
+        '404':
+          description: Factura no encontrada
+  /productos:
+  # GET /productos: Obtener todos los productos en stock.
+    get:
+      summary: Obtener todos los productos en stock
+      responses:
+        '200':
+          description: Lista de productos obtenida correctamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Producto'
+# POST /productos: Crear un nuevo producto en el stock.
+    post:
+      summary: Crear un nuevo producto en el stock.
+      responses:
+        '200':
+          description: Lista de productos obtenida correctamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Producto'
+  /productos/{id}:
+# GET /productos/{id}: Obtener un producto por su ID.
+    get:
+      summary: Obtener un producto por su ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID único del producto
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Producto obtenido correctamente
+        '404':
+          description: Producto no encontrado
+  # PUT /productos/{id}: Actualizar un producto existente por su ID.
+    put:
+      summary: Actualizar un producto existente por su ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID único del producto
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Producto obtenido correctamente
+        '404':
+          description: Producto no encontrado
+  # DELETE /productos/{id}: Eliminar un producto existente por su ID.
+    delete:
+      summary: Eliminar un producto existente por su ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID único del producto
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Producto obtenido correctamente
+        '404':
+          description: Producto no encontrado
+  /clientes:
+  # GET /clientes: Obtener todos los clientes registrados.
+    get:
+      summary: Obtener todos los clientes registrados.
+      responses:
+        '200':
+          description: Lista de clientes obtenida correctamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cliente'
+  # POST /clientes: Crear un nuevo cliente.
+    post:
+      summary: Crear un nuevo cliente.
+      responses:
+        '200':
+          description: Lista de cliente obtenida correctamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cliente'
+  /clientes/{id}:
+  # GET /clientes/{id}: Obtener un cliente por su ID.
+    get:
+      summary: Obtener un cliente por su ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID único del cliente
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Cliente obtenido correctamente
+        '404':
+          description: Cliente no encontrado
+  # PUT /clientes/{id}: Actualizar los datos de un cliente existente por su ID.
+    put:
+      summary: Actualizar los datos de un cliente existente por su ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID único del cliente
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Cliente obtenido correctamente
+        '404':
+          description: Cliente  no encontrado
+  
+  # DELETE /clientes/{id}: Eliminar un cliente existente por su ID.
+    delete:
+      summary: Eliminar un cliente existente por su ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID único del cliente
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Cliente obtenido correctamente
+        '404':
+          description:  Cliente  no encontrado
+          
+  /proveedores: 
+  # GET /proveedores: Obtener todos los proveedores registrados.
+    get:
+      summary: Obtener todos los proveedores registrados.
+      responses:
+        '200':
+          description: Lista de proveedores obtenido correctamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Proveedor'
+  # POST /proveedores: Crear un nuevo proveedor.
+    post:
+      summary: Crear un nuevo proveedor.
+      responses:
+        '200':
+          description: Lista de proveedores obtenido correctamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Proveedor'
+  /proveedores/{id}:
+  # GET /proveedores/{id}: Obtener un proveedor por su ID.
+    get:
+      summary: Obtener un proveedor por su ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID único del proveedor
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Proveedor obtenido correctamente
+        '404':
+          description: Proveedor no encontrado
+  # PUT /proveedores/{id}: Actualizar los datos de un proveedor existente por su ID.
+    put:
+      summary:  Actualizar los datos de un proveedor existente por su ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID único del proveedor
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Proveedor obtenido correctamente
+        '404':
+          description: Proveedor no encontrado
+  # DELETE /proveedores/{id}: Eliminar un proveedor existente por su ID.
+    delete:
+      summary: Eliminar un proveedor existente por su ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID único del proveedor
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Proveedor obtenido correctamente
+        '404':
+          description: Proveedor no encontrado
+  /reportes:
+  #GET /clientes: Obtener todos los reporte registrados. 
+    get:
+      summary: Obtener un reporte por su ID. 
+      responses:
+        '200':
+          description: Lista de reportes obtenida correctamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Reporte'
+  #POST / reportes : Crear un nuevo reporte.
+    post:
+      summary: Crear una nuevo reporte
+      responses:
+        '200':
+          description: Lista de reporte obtenida correctamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Reporte'
+  /reportes/{id}:
+  #GET /reportes/{id}: Obtener un reporte por su ID. 
+    get:
+      summary: Obtener un reporte por su ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID único de la reporte
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Reporte obtenido correctamente
+        '404':
+          description: Reporte no encontrada
+  #PUT / reportes /{id}: Actualizar el reporte 
+    put:
+      summary: Actualizar el reporte existente por su ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID único del reporte
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Reporte obtenido correctamente
+        '404':
+          description: Reporte no encontrada
+  #DELETE /productos/{id}: Eliminar un reporte existente por su ID.
+    delete:
+      summary: Eliminar un reporte existente por su ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID único del reporte
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Reporte obtenido correctamente
+        '404':
+          description: Reporte no encontrada
+
+#propiedad fundamental
+components:
+  schemas:
+    Factura:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: ID único de la factura
+        numero:
+          type: string
+          description: Número de la factura
+        cliente:
+          type: string
+          description: Nombre del cliente
+        total:
+          type: number
+          format: double
+          description: Total de la factura
+      required:
+        - numero
+        - cliente
+        - total
+        # Definición de otras propiedades de la factura
+    Producto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: ID único del producto
+        nombre:
+          type: string
+          description: Nombre del producto
+        precio:
+          type: number
+          format: double
+          description: Precio del producto
+        descripcion:
+          type: string
+          description: Descripción del producto
+      required:
+        - nombre
+        - precio
+    Cliente:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: ID único del producto
+        nombre:
+          type: string
+          description: Nombre del producto
+        apellido:
+          type: string
+          description: Nombre del producto
+        descripcion:
+          type: string
+          description: Descripción del producto
+      required:
+        - nombre
+        - precio
+    Proveedor:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: ID único del producto
+        nombre:
+          type: string
+          description: Nombre del producto
+        apellido:
+          type: string
+          description: Nombre del producto
+        descripcion:
+          type: string
+          description: Descripción del producto
+      required:
+        - nombre
+        - precio
+    Reporte:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: ID único del reporte
+        descripcion:
+          type: string
+          description: Descripción del reportes
